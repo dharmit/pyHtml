@@ -12,13 +12,15 @@ __doctype__ = "<!DOCTYPE html>"
 class pyhtml:
     def __init__(self, title="My Web Page"):
         self.title = title
+        self.fil = open(self.title, "w")
+        self.fil.close()
         self.html()
 
     def html(self):
         """This function generates 4 tags & end tags that are always there\
                 in an html file namely <html>, <head>, <title>, <body>"""
 
-        with open("file", "w") as f:
+        with open(str(self.fil), "w") as f:
             f.write("%s\n\
                     <html>\n\
                     <head>\n\
@@ -32,7 +34,7 @@ class pyhtml:
         """ This function adds an external CSS to the html file. An external\
                 CSS is ideal when a style is to be applied to multiple pages"""
 
-        with open("file", "r+b") as f:
+        with open(str(self.fil), "r+b") as f:
             map = mmap.mmap(f.fileno(), 0)
             m = re.search("</head>", map)
             start = m.start()
@@ -50,7 +52,7 @@ class pyhtml:
         """ This functions adds an internal CSS to the html file. It helps\
             to give unique style to the html page."""
 
-        with open("file", "r+b") as f:
+        with open(str(self.fil), "r+b") as f:
             map = mmap.mmap(f.fileno(), 0)
             m = re.search("<title>", map)
             start = m.start()
@@ -70,7 +72,7 @@ class pyhtml:
     def a(self, content, path):
         """ This function creates an a tag. It takes content and path to the \
                 file as parameters."""
-        with open("file", "r+b") as f:
+        with open(sit(self.fil), "r+b") as f:
             map = mmap.mmap(f.fileno(), 0)
             m = re.search("</body>", map)
             start = m.start()
@@ -85,7 +87,7 @@ class pyhtml:
         """ This function simply creates a horizontal bar. It takes no\
             arguments """
 
-        with open("file", "r+b") as f:
+        with open(str(self.fil), "r+b") as f:
             map = mmap.mmap(f.fileno(), 0)
             m = re.search("</body>", map)
             start = m.start()
@@ -98,7 +100,7 @@ class pyhtml:
 
     def printOut(self):
         output = ''
-        with open("file", "r") as f:
+        with open(str(self.fil), "r") as f:
             html_output = f.readline()
             while html_output:
                 output += html_output.lstrip()
