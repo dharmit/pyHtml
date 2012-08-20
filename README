@@ -12,8 +12,8 @@ filename compulsory because if the user doesn't pass any value to pyHtml()
 function for two instances, the resultant "My Web Page" file becomse a mess.
 
 * The functions implemented are 
-    - external\_css : Lets you provide an external CSS file to the html page.
-    - internal\_css : Lets you create custom CSS for the html page.
+    - external_css : Lets you provide an external CSS file to the html page.
+    - internal_css : Lets you create custom CSS for the html page.
     - a             : Lets you create an anchor tag.
     - hr            : Lets you generate a horizontal ruler bar.
     - printOut      : Lets you print the resulting html file.
