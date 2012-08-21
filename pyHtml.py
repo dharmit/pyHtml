@@ -12,15 +12,16 @@ __doctype__ = "<!DOCTYPE html>"
 class pyhtml:
     def __init__(self, title="My Web Page"):
         self.title = title
-        self.fil = open(self.title, "w")
-        self.fil.close()
-        self.html()
+        #print str(self.title)
+        #self.fil = open(self.title, "w+")
+        #self.fil.close()
+        self.html(self.title)
 
-    def html(self):
+    def html(self, title):
         """This function generates 4 tags & end tags that are always there\
                 in an html file namely <html>, <head>, <title>, <body>"""
 
-        with open(str(self.fil), "w") as f:
+        with open(title, "w") as f:
             f.write("%s\n\
                     <html>\n\
                     <head>\n\
@@ -34,7 +35,7 @@ class pyhtml:
         """ This function adds an external CSS to the html file. An external\
                 CSS is ideal when a style is to be applied to multiple pages"""
 
-        with open(str(self.fil), "r+b") as f:
+        with open(self.title, "r+b") as f:
             map = mmap.mmap(f.fileno(), 0)
             m = re.search("</head>", map)
             start = m.start()
@@ -52,7 +53,7 @@ class pyhtml:
         """ This functions adds an internal CSS to the html file. It helps\
             to give unique style to the html page."""
 
-        with open(str(self.fil), "r+b") as f:
+        with open(self.title, "r+b") as f:
             map = mmap.mmap(f.fileno(), 0)
             m = re.search("<title>", map)
             start = m.start()
@@ -72,7 +73,7 @@ class pyhtml:
     def a(self, content, path):
         """ This function creates an a tag. It takes content and path to the \
                 file as parameters."""
-        with open(sit(self.fil), "r+b") as f:
+        with open(self.title, "r+b") as f:
             map = mmap.mmap(f.fileno(), 0)
             m = re.search("</body>", map)
             start = m.start()
@@ -87,7 +88,7 @@ class pyhtml:
         """ This function simply creates a horizontal bar. It takes no\
             arguments """
 
-        with open(str(self.fil), "r+b") as f:
+        with open(self.title, "r+b") as f:
             map = mmap.mmap(f.fileno(), 0)
             m = re.search("</body>", map)
             start = m.start()
@@ -98,9 +99,36 @@ class pyhtml:
             f.write(temp)
             map.close()
 
+    def br(self):
+        """ This function insert a single line break each time it is called.\
+            It doesn't take any arguemnts."""
+        with open(self.title, "r+b") as f:
+            map = mmap.mmap(f.fileno(), 0)
+            m = re.search("</body>", map)
+            start = m.start()
+            f.seek(start)
+            temp = f.read()
+            f.seek(start)
+            f.write("<br />")
+            f.write(temp)
+            map.close()
+
+    def comment(self, comm):
+        """ This function adds a comment to the html page and takes one \
+            argument which is the comment itself."""
+        with open(self.title, "r+b") as f:
+            map = mmap.mmap(f.fileno(), 0)
+            m = re.search("</body>", map)
+            start = m.start()
+            f.seek(start)
+            temp = f.read()
+            f.write("<!-- %s -->" % comm)
+            f.write(temp)
+            map.close()
+
     def printOut(self):
         output = ''
-        with open(str(self.fil), "r") as f:
+        with open(self.title, "r") as f:
             html_output = f.readline()
             while html_output:
                 output += html_output.lstrip()
