@@ -16,6 +16,8 @@ function for two instances, the resultant "My Web Page" file becomse a mess.
     - internal\_css : Lets you create custom CSS for the html page.
     - a             : Lets you create an anchor tag.
     - hr            : Lets you generate a horizontal ruler bar.
+    - br            : Inserts a single line break in the html file.             
+    - comment       : Lets you add a comment to an html page.                   
     - printOut      : Lets you print the resulting html file.
 
 * Usage : Import the pyHtml module in a script and use it as per the
