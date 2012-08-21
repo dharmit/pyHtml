@@ -126,6 +126,48 @@ class pyhtml:
             f.write(temp)
             map.close()
 
+    def b(self, data):
+        """ This function makes the data passed to it appear in bold text.\
+            That is it inserts the <b> tag around the data passed to it."""
+        with open(self.title, "r+b") as f:
+            map = mmap.mmap(f.fileno(), 0)
+            m = re.search("</body>", map)
+            start = m.start()
+            f.seek(start)
+            temp = f.read()
+            f.seek(start)
+            f.write("<b>%s</b><br />" % data)
+            f.write(temp)
+            map.close()
+
+    def i(self, data):
+        """ This function makes the data passed to it appear in italics text.\
+            That is it inserts the <i> tag around the data passed to it."""
+        with open(self.title, "r+b") as f:
+            map = mmap.mmap(f.fileno(), 0)
+            m = re.search("</body>", map)
+            start = m.start()
+            f.seek(start)
+            temp = f.read()
+            f.seek(start)
+            f.write("<i>%s</i><br />" % data)
+            f.write(temp)
+            map.close()
+
+    def u(self, data):
+        """ This function makes the data passed to it appear in underlined.\
+            That is it inserts the <i> tag around the data passed to it."""
+        with open(self.title, "r+b") as f:
+            map = mmap.mmap(f.fileno(), 0)
+            m = re.search("</body>", map)
+            start = m.start()
+            f.seek(start)
+            temp = f.read()
+            f.seek(start)
+            f.write("<u>%s</u><br />" % data)
+            f.write(temp)
+            map.close()
+
     def printOut(self):
         output = ''
         with open(self.title, "r") as f:
