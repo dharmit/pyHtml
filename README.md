@@ -21,4 +21,8 @@ function for two instances, the resultant "My Web Page" file becomse a mess.
 * Usage : Import the pyHtml module in a script and use it as per the
 documenation.
 
-A lot of improvements need to be made to the code yet.
+A lot of improvements need to be made to the code yet. Areas of improvement :
+
+* Instead of using mmap each time a function is called and seeking to the
+position where we want to insert, we can create a variable called say, insert,
+and keep a track of the position. This should speed up the operation.
