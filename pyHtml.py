@@ -2,6 +2,8 @@
 import string
 import mmap
 import re
+import sys
+import os
 
 __doc__ = """This class helps user generate html code from within your python \
         code"""
@@ -177,3 +179,36 @@ class pyhtml:
                 html_output = f.readline()
             f.close()
         return output
+
+def generate_html(path, parent = None):
+    listing = os.listdir(path)
+    listing = [l for l in listing if l[0] != '.']
+    full_path_listing = []
+
+    for i in listing:
+        full_path_listing.append(path + '/' + i)
+
+    title = os.path.abspath(path + "/index.html")
+    page = pyhtml(str(title))
+    page.internal_css(body="{ width: 500px; margin: 0 auto; }")
+    if parent != None:
+        page.a("Parent Directory", parent + '/index.html')
+    page.b("Directory listing for %s" % os.path.abspath(path))
+    page.br()
+    page.hr()
+
+    for i in full_path_listing:
+        if os.path.isdir(i):
+            generate_html(os.path.abspath(i), path)
+            page.a(i.split('/')[-1], i + '/index.html')
+        else:
+            #page.a(listing[i], full_path_listing[i])
+            page.a(i.split('/')[-1], i)
+            #page.a(full_path_listing[i], 'bogus')
+
+    return page.printOut()
+
+if __name__ == "__main__":
+    to_print = generate_html(sys.argv[1])
+    print to_print
+    #return to_print
