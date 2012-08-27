@@ -1,4 +1,4 @@
 USAGE
 =====
 
-$ python html_listing /path/to/directory > index.html
+$ python pyHtml.py /path/to/directory > index.html
